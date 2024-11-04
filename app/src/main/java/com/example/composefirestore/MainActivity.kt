@@ -23,6 +23,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.composefirestore.ui.theme.ComposeFireStoreTheme
 
@@ -47,6 +48,38 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Birth(m: Modifier){
+    var userName by remember { mutableStateOf("吳沛涵")}
+    var userWeight by remember { mutableStateOf(3800)}
+
+    Column {
+        TextField(
+            value = userName,
+            onValueChange = { newText ->
+                userName = newText
+            },
+            modifier = m,
+            label = { Text("姓名") },
+            placeholder = { Text("請輸入您的姓名") }
+
+        )
+
+
+        TextField(
+            value = userWeight.toString(),
+            onValueChange = { newText ->
+                if (newText == ""){
+                    userWeight = 0
+                }
+                else{userWeight = newText.toInt()}
+            },
+            label = { Text("出生體重") },
+            keyboardOptions = KeyboardOptions
+                (keyboardType = KeyboardType.Number)
+        )
+
+
+        Text("您輸入的姓名是：$userName\n出生體重為：$userWeight 公克")
+    }
 
 }
 
